@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Painting with 3D Gaussian Splat Brushes">
+  <meta name="keywords" content="Gaussian Splatting">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painting with 3D Gaussian Splat Brushes </title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<style>
+  table { 
+      table-layout:fixed;
+      width:100%;
+  }
+  img {
+      max-height:100%;
+      max-width:100%;
+  }
+  thead th {
+      top: 0;
+      position: sticky;
+      z-index: 20;
+      background-color: white;
+  }
+  </style>
+<body>
+
+  <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" href="">
+        <span class="icon">
+            <i class="fas fa-home"></i>
+        </span>
+        </a>
+  
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Full Results
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="./static/full-results/qualitative_comparison_main.html">
+              Qualitative Comparisons on PhotoGen 
+            </a>
+            <a class="navbar-item" href="./static/full-results/qualitative_comparison_benchmark.html">
+              Qualitative Comparisons on Benchmark
+            </a>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </nav> -->
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title"><span class="dnerf">Painting with 3D Gaussian Splat Brushes</span>  </h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://karranpandey.github.io/">Karran Pandey</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="">Anita Hu</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="">Clement Fuji-Tsang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://orperel.github.io/">Or Perel</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.dgp.toronto.edu/~karan/">Karan Singh</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://shumash.com">Masha Shugrina</a><sup>2</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Toronto,</span>
+            <span class="author-block"><sup>2</sup>NVIDIA,</span>
+          </div>
+
+          <div class="is-size-5 publication-venue">
+          SIGGRAPH 2025
+          </div>
+
+         <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>PDF</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-google-drive"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+              </span>
+
+            </div>
+
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4" type="video/mp4">
+      </video> -->
+      <img src="./static/images/splat_teaser.png"
+      class = "interpolation-image"
+        alt="Painting with 3D Gaussian splat brushes."/>
+        <!-- <img src="./static/images/intro.png"
+        class = "interpolation-image"
+          alt="3D-aware object edits for diffusion images."/> -->
+        <h2 class="subtitle has-text-centered">
+          <br>
+          We propose the first tool for painting with real-world texture-geometry content, represented as 3D Gaussian splats. Our technique allows artists to source both their brushes and their canvases from in-the-wild captures, and swiftly remix highly realistic content through direct and controllable painting. 
+        </h2>
+      </div>
+  </div>
+</section>
+
+
+
+
+<!-- <section class="section" style="background-color:#f7f7f7">
+  <div class="container is-max-desktop is-centered has-text-centered">
+        
+
+  
+    <iframe width="883" height="591" src="https://www.youtube.com/embed/dYO1W5O98pY" title="Painting with 3D Gaussian Splat Brushes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <br/>
+    
+    <br/>
+
+  </div>
+</section> -->
+
+<!-- Abstract. -->
+<section class="section" style="background-color:#f7f7f7">
+  <div class="container is-max-desktop" >
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We explore interactive painting on 3D Gaussian splat scenes and other surfaces using 3D Gaussian splat brushes, each containing a chunk of realistic texture-geometry that make capture representations so appealing. </p> 
+            <p> The suite of brush capabilities we propose enables 3D artists to capture and remix real world imagery and geometry with direct interactive control. In particular, we propose a set of algorithms for: 
+              <ul>
+                <li>selecting subsets of Gaussians as a brush pattern interactively,</li>
+                <li>applying the brush interactively to the same or other 3DGS scenes or other 3D surfaces using stamp-based painting,</li>
+                <li>using an inpainting Diffusion Model to adjust stamp seams for seamless and realistic appearance</li>
+                <li>an ensemble of artistic brush parameters, resulting in a wide range of appearance options for the same brush.</li>
+              </ul>
+            </p>
+            <p>Our contribution is a combination of algorithms, design features and creative affordances, that together enable the first implementation of interactive brush-based painting with 3D Gaussian splats. </p>
+            
+          </div>
+      </div>
+    </div>
+
+    <!-- <div class="container is-max-desktop is-centered has-text-centered">
+
+      <h2 class="title is-3">Video</h2>
+      <br>
+      
+
+    </div> -->
+
+
+    <!-- Paper video. -->
+   <div class="columns is-centered has-text-centered" >
+      <div class="column is-four-fifths">
+        <!-- <h2 class="title is-3">Video</h2> -->
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/dYO1W5O98pY" title="Painting with 3D Gaussian Splat Brushes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<!-- Results. -->
+
+
+<!-- Method Overview. -->
+<section class="section">
+  <div class="container is-max-desktop" >
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Painting Technique</h2>
+        <img src="./static/images/method.png"
+        class = "interpolation-image"
+          alt="Method overview."/>
+        <div class="content has-text-justified">
+          <br>
+          Our method computes seamless strokes on surfaces as users paint with oriented 3DGS stamps as follows:
+
+          <ul>
+
+            <li>
+              A 3D spline is computed from the collection of first-hits on the surface gathered as a user paints.
+            </li>
+
+            <li>
+              Stamps are then rigidly placed at regular intervals along the spline. 
+            </li>
+
+            <li>
+              Each stamp is then non-rigidly deformed to locally adapt its shape to the underlying spline in 3D.
+            </li>
+
+            <li>
+              Finally, a background process repairs seams between stamps using diffusion inpainting. 
+            </li>
+        
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="section" style="background-color:#f7f7f7">
+<div class="columns is-centered">
+  <div class="column is-full-width has-text-centered">
+    <h2 class="title is-4">References</h2>
+
+    <div class="content has-text-centered">
+      <p>
+        <a href="https://prior.allenai.org/projects/object-edit">Object 3DIT</a> is a language-guided model for 3D-aware image editing.
+      </p>
+      <p>
+        <a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Song_ObjectStitch_Object_Compositing_With_Diffusion_Model_CVPR_2023_paper.pdf">ObjectStitch</a> is a generative object compositing method which we adapt for object-level editing on scenes.
+      </p>
+      <p>
+        <a href="https://zero123.cs.columbia.edu/">Zero-1-2-3</a> is a diffusion-based novel-view synthesis method which we use in conjunction with inpainting to perform object-level 3D-aware image editing.
+      </p>
+    </div>
+  </div>
+</div>
+</section> -->
+
+<!--/ Concurrent Work. -->
+
+
+<!--<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{park2021nerfies,
+  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
+  title     = {Nerfies: Deformable Neural Radiance Fields},
+  journal   = {ICCV},
+  year      = {2021},
+}</code></pre>
+  </div>
+</section> -->
+
+<!-- 
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+          </p>
+          <p>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer> -->
+
+</body>
+</html>
